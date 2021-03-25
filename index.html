@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona Jasia</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <style>
+        html {
+            background: radial-gradient(#e66465, #9198e5);
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        img {
+            display: block;
+            width: 600px;
+            max-width: 100%;
+            margin-bottom: 20px;
+            box-shadow: 0 0 1rem #444;
+        }
+
+        #koty {
+            display: table;
+            margin: 0 auto;
+        }
+        
+        h1{
+            text-align: center;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id="koty">
+<h1>Strona z kotami Jasia</h1>
+    </div>
+
+    <script>
+
+        function addCat() {
+
+            $.get('https://api.thecatapi.com/v1/images/search', {}, function (data) {
+                let url = data[0].url;
+                $('#koty').append(`<img src="${url}"/>`)
+            });
+        }
+
+        for (let i = 0; i < 20; i++) {
+            addCat();
+        }
+
+        $(window).scroll(function () {
+            let pos = $(document).height() - $(window).scrollTop();
+            if (pos < 4000) {
+
+                for (let i = 0; i < 20; i++) {
+                    addCat();
+                }
+
+            }
+        })
+
+    </script>
+</body>
+
+</html>
